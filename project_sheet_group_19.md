@@ -21,7 +21,7 @@ Team-Mitglieder:
   
 Dieser Datensatz enthält eine Liste von Liedtexten aus den Jahren 1950 bis 2019, welche bereits vorbearbeitet sind. Die Lyrics wurden bereits tokenisiert und diverse Musik-Metadaten extrahiert/bereitgestellt. 
 
-#### Wichtige Metadaten
+#### Wichtige Features
 
 | Metrik        | Beschreibung                                                   |
 | ------------- | -------------------------------------------------------------- |
@@ -32,7 +32,9 @@ Dieser Datensatz enthält eine Liste von Liedtexten aus den Jahren 1950 bis 2019
 | lyrics        | Liedtext des Songs (bereits tokenisiert)                       |
 | len           | Anzahl der Tokens                                              |
 
-#### Weitere Metainformationen
+Nebst dieser aufgezeigten Kernfeatures enthielt der Datensatz ebenfalls einige Audio-Features, welche als Kennzahlen in Form von Prozentangaben musikalische Eigenschaften des Songs beschreiben:
+
+#### Audio-Features
 
 |                        |      |                      |      |                           |      |                        |      |
 |------------------------|------|----------------------|------|---------------------------|------|------------------------|------|
@@ -49,6 +51,14 @@ Link: https://www.kaggle.com/datasets/saurabhshahane/music-dataset-1950-to-2019
 
 Dieser Datensatz enthält Songnamen, Künstlernamen, einen Link zum Song und Liedtext. 
 
+#### Wichtige Features
+
+| Metrik        | Beschreibung                                                   |
+| ------------- | -------------------------------------------------------------- |
+| artist        | Name des Künstlers oder der Band, die den Song performt        |
+| song          | Titel des Songs                                                |
+| link          | Link zum Song (defekt)                                |
+| text          | Liedtext des Songs (unbearbeitet)                              |
 
 Link: https://www.kaggle.com/datasets/notshrirang/spotify-million-song-dataset/discussion
 
@@ -65,7 +75,22 @@ Link: https://www.kaggle.com/datasets/notshrirang/spotify-million-song-dataset/d
 
 ### "Was bisher geschah..."
 
-Da uns ein bereits präprozessierter Datensatz im Rahmen dieses Kurses nicht besonders sinnvoll erschien,
+Der **Spotify Million Song** Datensatz klang initial durch den extrem umfangreichen Textkorpus sehr vielversprechend. Jedoch vermissten wir einige wichtige Metadaten wie etwa ein Veröffentlichungsdatum oder eine Genrezuweisung. In dieser Hinsicht war der **Music Dataset : 1950 to 2019** Datensatz durch die Features _release_date_ und _genre_ ersterer Quelle überlegen. Auch die Anzahl von 28372 Songs entsprach unseren Anforderungen, weswegen wir uns final für dieses Datenset entschieden.
+
+Ein bereits präprozessierter Datensatz diesen Umfangs im Rahmen dieses Kurses erschien uns nicht besonders sinnvoll. Darum haben wir beschlossen, diesen etwas auszudünnen und uns von einigen Features zu trennen. Hierbei ging es in erster Linie um das Entfernen der **Audio-Features**.
+Da wir die Lyrics gerne selbst einer Preprocessing-Pipeline unterziehen wollten, entschieden wir uns den Datensatz um das Feature _lyrics_raw_ zu erweitern. Hierfür wurde ein Skript geschrieben, welches über die Open-Source API _Lyrics.ovh_ mittels Get-Requests für jeden Song des Datasets den Songtext ergänzt.
+Leider konnte nicht für jeden Song ein entsprechender Songtext gefunden werden. Dennoch konnten wir durch unser Vorhaben einen **16012** starken Datensatz zusammenstellen, der am Ende folgende Features beinhaltete:
+
+| Metrik        | Beschreibung                                                   |
+| ------------- | -------------------------------------------------------------- |
+| artist_name   | Name des Künstlers oder der Band, die den Song performt        |
+| track_name    | Titel des Songs                                                |
+| release_date  | Veröffentlichungsjahr des Songs                                |
+| genre         | Musikstil oder Kategorie, z. B. Pop, Rock, Hip-Hop             |
+| len           | Anzahl der Tokens                                              |
+| lyrics_raw    | Unbearbeiteter Originalliedtext                                |
+
+Wir wollten vorerst das Feature _len_ behalten. Somit stehen uns für später  Kennzahlen über die Tokenanzahl pro Song zur Verfügung, mit denen wir unsere Ergebnisse nach Unterziehen des Textkorpus durch unsere NLP-Pipeline abgleichen können. 
 
 ### "...to be continued."
 * Wie wollen Sie vorgehen?
